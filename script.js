@@ -7,7 +7,7 @@ const api = {
 // This identifies and controls the event listener for the search box
 const searchBox = document.querySelector('.search-box');
 searchBox.addEventListener('keypress', startSearch)
-
+let icon = document.createElement('img');
 
 // When the enter key is pressed this will detect if it is a number or string and then run appropriate function
 function startSearch(event) {
@@ -69,20 +69,21 @@ function displayResults(results) {
   let lowHigh = document.querySelector('.current .low-high');
   lowHigh.innerText = `${Math.round(results.main.temp_min)}°F / ${Math.round(results.main.temp_max)}°F`;
 
-  let icon = document.createElement('img');
+  
+  icon.src = '';
+  let src;
+  console.log(icon)
   if (results.weather[0].main === 'Clouds') {
-    icon.src = './img/47309_overcast_icon.png';
-    document.querySelector('.icon').appendChild(icon)
+    src = './img/47309_overcast_icon.png';
   } else if (results.weather[0].main === 'Rain' || results.weather[0].main === 'Thunderstorm' || results.weather[0].main === 'Drizzle') {
-    icon.src = './img/118964_weather_scattered_showers_icon.png';
-    document.querySelector('.icon').appendChild(icon);
+    src = './img/118964_weather_scattered_showers_icon.png';
   } else if (results.weather[0].main === 'Snow') {
-    icon.src = './img/47313_occasional_snow_icon.png';
-    document.querySelector('.icon').appendChild(icon);
+    src = './img/47313_occasional_snow_icon.png';
   } else if (results.weather[0].main === 'Clear') {
-    icon.src = './img/47314_weather_icon.png';
-    document.querySelector('.icon').appendChild(icon);
+    src = './img/47314_weather_icon.png';
   }
+  icon.src = src;
+  document.querySelector('.icon').appendChild(icon);
 }
 
 // This function outputs and formats date and time.
